@@ -206,6 +206,7 @@ void thread_sleep(int msec)
     cur->_sched_data.wakeuptime = THREAD_CURTIME + msec;
     cur->state = THREAD_SLEEP;
     thread_yield();
+    cur->state = THREAD_RUNNING;
 }
 
 void thread_join(thread_id id)
