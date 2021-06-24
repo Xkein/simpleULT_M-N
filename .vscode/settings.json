@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "thread.h": "c",
+        "stdio.h": "c",
+        "threads.h": "c",
+        "time.h": "c",
+        "stdbool.h": "c",
+        "futex.h": "c"
+    }
+}
