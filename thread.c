@@ -112,8 +112,8 @@ void thread_start(thread *t)
     while (1)
     {
         thread_yield();
+        perror("exited thread yield fail!");
         thrd_exit(0);
-        //printf("exited thread yield fail!");
     }
 }
 
