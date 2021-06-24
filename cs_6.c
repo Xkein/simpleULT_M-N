@@ -45,7 +45,7 @@ int main()
 {
   printf("my pid:%d\n", getpid());
   printf("my thread id:%ld\n", pthread_self());
-  thread_id tid1, tid2, tid3;
+  thread_id tid1, tid2, tid3, tid4;
   thread_create(&tid1, NULL, thread1, "loop 1 times");
   thread_create(&tid2, NULL, thread1, "loop 2 times");
   thread_create(&tid3, NULL, thread1, "loop 3 times");
@@ -63,6 +63,10 @@ int main()
   thread_join(tid1);
   thread_join(tid2);
   thread_join(tid3);
+
+  thread_sleep(1000);
+  thread_create(&tid4, NULL, thread1, "loop 4 times");
+  thread_join(tid4);
 
   return 0;
 }
