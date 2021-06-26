@@ -65,6 +65,7 @@ static thread *_thread_from_kernel(kthread_id kid)
     return new_thread;
 }
 
+/* Attach thread to kernel thread. */
 void _set_thread_self(kthread_id kid, thread *thread)
 {
     for (int idx = 0; idx < thread_count; idx++)
@@ -79,7 +80,7 @@ void _set_thread_self(kthread_id kid, thread *thread)
         }
     }
 }
-
+/* Get running thread on current kernel thread. */
 thread_id get_thread_self()
 {
     kthread_id kid = thrd_current();
@@ -103,6 +104,7 @@ thread_id get_thread_self()
     return new_thread->id;
 }
 
+/* Thread's begin and end function. */
 void thread_start(thread *t)
 {
     t->state = THREAD_RUNNING;
