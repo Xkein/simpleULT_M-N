@@ -112,16 +112,20 @@ void thread_yield()
   closealarm();
   thread_id cur_id = get_thread_self();
   thread *cur = threads[cur_id];
+  pthread_mutex_lock(&yield_mutex);
   thread *next = pick();
   if (next && cur != next)
   {
     // ensure each thread running atomically
     if (!pthread_mutex_trylock(&next->_sched_data.lock))
     {
+      pthread_mutex_unlock(&yield_mutex);
       pthread_mutex_unlock(&cur->_sched_data.lock);
       _thread_switch(cur, next);
+      return;
     }
   }
+  pthread_mutex_unlock(&yield_mutex);
 }
 
 static int tick_count = 1;
