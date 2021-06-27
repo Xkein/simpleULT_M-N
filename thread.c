@@ -23,7 +23,7 @@ typedef struct
 
 thread_relation thread_relations[100] = {};
 
-thread_attr default_attr = {.priority = 10, .stacksize = 4096};
+thread_attr default_attr = {.priority = 10, .stacksize = 8192};
 
 /* Allocate new id or replace old thread's id. */
 static thread_id allocate_id()
