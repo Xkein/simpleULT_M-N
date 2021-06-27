@@ -21,7 +21,7 @@ void *thread1(void *arg)
   while (count--)
   {
     spin();
-    thread_sleep(cur * 1000);
+    thread_sleep(cur * 500);
     printf("thread1 %d\n", cur);
   }
 
@@ -41,17 +41,29 @@ void *thread2(void *arg)
   }
 }
 
+void *thread3(void *arg)
+{
+  printf("thread3 created! arg = %s\n", (char *)arg);
+  while (1)
+  {
+    spin();
+    spin();
+    printf("thread3\n");
+  }
+}
+
 int main()
 {
   printf("my pid:%d\n", getpid());
   printf("my thread id:%ld\n", pthread_self());
-  thread_id tid1, tid2, tid3, tid4;
+  thread_id tid1, tid2, tid3, tid4, tid5;
   thread_create(&tid1, NULL, thread1, "loop 1 times");
   thread_create(&tid2, NULL, thread1, "loop 2 times");
   thread_create(&tid3, NULL, thread1, "loop 3 times");
+  thread_create(&tid5, NULL, thread3, "no end thread.");
 
   pthread_t id;
-  pthread_create(&id, NULL, thread2, NULL);
+  //pthread_create(&id, NULL, thread2, NULL);
 
   int i = 15;
   while (i--)
