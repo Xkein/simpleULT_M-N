@@ -73,7 +73,10 @@ void _set_thread_self(kthread_id kid, thread *thread)
         thread_relation *rel = &thread_relations[idx];
         if (rel->kid == kid)
         {
-            rel->thread->kid = THREAD_NULL;
+            if (rel->thread)
+            {
+                rel->thread->kid = THREAD_NULL;
+            }
             rel->thread = thread;
             thread->kid = kid;
             break;
